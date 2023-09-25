@@ -25,6 +25,7 @@ def main():
         resources=get_resources(),
         features=[
             "cyclical_pickup_hour",
+            "bin_hour",
             "quantile_bin_hour",
             "is_raining",
             "euclidean_distance",

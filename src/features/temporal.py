@@ -37,6 +37,21 @@ def cyclical_pickup_hour(pickup_hour):
     return cyclical(pickup_hour, cycle_length=HOURS_IN_DAY)
 
 
+@registry.register(name="bin_hour", depends=["pickup_hour"])
+def bin_cut_hour(pickup_hour):
+    """Interval-based hour range of the pickup."""
+
+    interval = int(HOURS_IN_DAY / config.features["hours_bins"])
+    bins = np.arange(0, HOURS_IN_DAY + 1, interval)
+
+    return pd.cut(
+        pickup_hour,
+        bins=bins,
+        labels=np.arange(1, config.features["hours_bins"] + 1),
+        right=False
+    )
+
+
 @registry.register(
     name="quantile_bin_hour", depends=["pickup_hour"]
 )
