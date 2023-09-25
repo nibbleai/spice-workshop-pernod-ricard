@@ -1,6 +1,7 @@
 from spice import Registry
 from src.schemas import TaxiColumn
 import numpy as np
+import pandas as pd
 
 registry = Registry("yannick")
 
@@ -38,3 +39,15 @@ def pickup_year(pickup_time):
 @registry.register(name="pickup_time")
 def pickup_time(data):
     return data[TaxiColumn.PICKUP_TIME]
+
+
+@registry.register(depends=["pickup_hour"])
+def bin_cut_hour(pickup_hour):
+    bins = np.arange(0, 25, 6)
+
+    return pd.cut(
+        pickup_hour,
+        bins=bins,
+        labels=np.arange(1, 5),
+        right=False
+    )
