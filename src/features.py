@@ -51,3 +51,16 @@ def bin_cut_hour(pickup_hour):
         labels=np.arange(1, 5),
         right=False
     )
+
+
+@registry.register(
+    name="quantile_hour",
+    depends=["pickup_hour"]
+)
+class QuantileHour:
+
+    def fit(self, pickup_hour):
+        self.hours_bins = pd.qcut(pickup_hour, q=4).cat.categories
+
+    def transform(self, pickup_hour):
+        return pd.cut(pickup_hour, bins=self.hours_bins)

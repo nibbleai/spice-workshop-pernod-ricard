@@ -9,10 +9,11 @@ def main():
 
     target = get_target(data)
     data, target = preprocess(data, target)
+    train_data, test_data = train_test_split(data)
 
     generator = Generator(registry)
-    features = generator.fit_transform(data).to_pandas()
-    print(features)
+    train_features = generator.fit_transform(train_data).to_pandas()
+    test_features = generator.transform(test_data).to_pandas()
 
 
 if __name__ == '__main__':
