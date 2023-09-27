@@ -9,12 +9,11 @@
     python -m venv .venv
     source .venv/bin/activate
     ```
-    
+
 1. Install project and dependencies
     ```bash
     # 'EXTRA_INDEX_URL' will be provided.
-    python -m pip install -r requirements.txt --extra-index-url=${EXTRA_INDEX_URL}
-    python -m pip install -e .
+    python -m pip install -e . --extra-index-url=${EXTRA_INDEX_URL}
     ```
 
 2. Initialize spice store (Needs to be done only once)
