@@ -15,5 +15,6 @@ if __name__ == "__main__":
          "httpx",
          "ydata-profiling",
          "matplotlib==3.7.0",
+         "jupyter",
       ]
    )
